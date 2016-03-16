@@ -1,22 +1,54 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class ShootOnAxisInput : MonoBehaviour {
 
     public GameObject bullet;
 
-    public float shootDelay = 0.1f;
+    public float shootDelay = 0.2f;
+    public float reloadDelay = 1.5f;
 
     public bool canShoot = true;
+    public int ammoCount = 6;
+
+    public Text ammoText;
 
 	// Use this for initialization
 	void Start () {
-	
-	}
+        ammoText.text = ammoCount.ToString();
+    }
 
     void ResetShot()
     {
         canShoot = true;
+    }
+
+    void Reload()
+    {
+        ammoCount = 6;
+        ammoText.text = ammoCount.ToString();
+        canShoot = true;
+    }
+
+    void Shoot(float angle)
+    {
+        Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+
+        canShoot = false;
+        ammoCount = ammoCount - 1;
+        ammoText.text = ammoCount.ToString();
+        Debug.Log(ammoCount);
+
+        if (ammoCount == 0)
+        {
+            ammoText.text = "Reloading...";
+            Invoke("Reload", reloadDelay);
+        }
+        else
+        {
+            Invoke("ResetShot", shootDelay);
+        }
     }
 
 	// Update is called once per frame
@@ -28,10 +60,6 @@ public class ShootOnAxisInput : MonoBehaviour {
         if(canShoot && Input.GetMouseButton(0))
         {
 
-            //float angle = Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * Mathf.Rad2Deg;
-            //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            //transform.rotation = );
-
             Vector2 mousePos = Input.mousePosition;
 
             Vector2 objectPos = Camera.main.WorldToScreenPoint(transform.position);
@@ -39,19 +67,15 @@ public class ShootOnAxisInput : MonoBehaviour {
             mousePos.y = mousePos.y - objectPos.y;
 
             float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-            Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
 
-            canShoot = false;
-            Invoke("ResetShot", shootDelay);
+            Shoot(angle);
+            
         }
         else if (canShoot && shootDirection.magnitude > 0.1f && Input.GetAxis("Shoot") > 0.5f)
         {
             float angle = Mathf.Atan2(Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * Mathf.Rad2Deg;
 
-            Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
-
-            canShoot = false;
-            Invoke("ResetShot", shootDelay);
+            Shoot(angle);
         }
 	
 	}
