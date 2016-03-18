@@ -5,6 +5,7 @@ using System.Collections;
 public class ShootOnAxisInput : MonoBehaviour {
 
     public GameObject bullet;
+    GameObject gun;
 
     public float shootDelay = 0.2f;
     public float reloadDelay = 1.5f;
@@ -16,7 +17,7 @@ public class ShootOnAxisInput : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        GameObject gun = GetComponent<GameObject>();
+        gun = GetComponent<GameObject>();
         ammoText.text = ammoCount.ToString();
     }
 

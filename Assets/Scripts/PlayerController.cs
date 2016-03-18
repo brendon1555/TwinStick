@@ -7,9 +7,12 @@ public class PlayerController : MonoBehaviour {
     Rigidbody2D rigid2d;
     public GameObject gun;
 
+    Animator anim;
+
 	// Use this for initialization
 	void Start () {
         rigid2d = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -52,6 +55,15 @@ public class PlayerController : MonoBehaviour {
         rbVelocity *= moveSpeed;
         rigid2d.velocity = rbVelocity;
 
+        if(rbVelocity.sqrMagnitude > 0.01f)
+        {
+            anim.SetBool("Move", true);
+        }
+        else
+        {
+            anim.SetBool("Move", false);
+        }
+
         Vector2 stickDirection = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
         if (stickDirection.magnitude > 0.1f)
         {
@@ -64,6 +76,15 @@ public class PlayerController : MonoBehaviour {
             mousePos.x = mousePos.x - objectPos.x;
             mousePos.y = mousePos.y - objectPos.y;
             gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg));
+        }
+
+        if (gun.transform.eulerAngles.z >= 90 && gun.transform.eulerAngles.z <= 270)
+        {
+            gun.transform.localScale = new Vector3(1f, -1f, 1f);
+        }
+        else if (gun.transform.eulerAngles.z < 90 || gun.transform.eulerAngles.z > 270)
+        {
+            gun.transform.localScale = new Vector3(1f, 1f, 1f);
         }
         //rotation
         //Vector3 mousePos = Input.mousePosition;
