@@ -17,8 +17,14 @@ public class BulletController : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Wall")
+        if (other.tag == "Wall")
         {
+            Destroy(gameObject);
+        }
+
+        if(other.tag == "Enemy")
+        {
+            Debug.Log("Show Explosion");
             Destroy(gameObject);
         }
     }

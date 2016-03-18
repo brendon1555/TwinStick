@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour {
 
     public float moveSpeed = 5.0f;
     Rigidbody2D rigid2d;
+    public GameObject gun;
 
 	// Use this for initialization
 	void Start () {
@@ -47,13 +48,23 @@ public class PlayerController : MonoBehaviour {
         //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
 
-        Vector2 rbVelocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-
+        Vector2 rbVelocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         rbVelocity *= moveSpeed;
-
         rigid2d.velocity = rbVelocity;
 
+        Vector2 stickDirection = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
+        if (stickDirection.magnitude > 0.1f)
+        {
+            gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * Mathf.Rad2Deg));
+        }
+        else
+        {
+            Vector2 mousePos = Input.mousePosition;
+            Vector2 objectPos = Camera.main.WorldToScreenPoint(gun.transform.position);
+            mousePos.x = mousePos.x - objectPos.x;
+            mousePos.y = mousePos.y - objectPos.y;
+            gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg));
+        }
         //rotation
         //Vector3 mousePos = Input.mousePosition;
 
@@ -63,5 +74,5 @@ public class PlayerController : MonoBehaviour {
 
         //float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
         //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-	}
+    }
 }

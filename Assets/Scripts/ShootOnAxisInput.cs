@@ -16,6 +16,7 @@ public class ShootOnAxisInput : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        GameObject gun = GetComponent<GameObject>();
         ammoText.text = ammoCount.ToString();
     }
 
@@ -33,7 +34,10 @@ public class ShootOnAxisInput : MonoBehaviour {
 
     void Shoot(float angle)
     {
-        Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, angle)));
+
+        Vector3 offset = transform.rotation * new Vector3(0.7f, 0, 0);
+
+        Instantiate(bullet, transform.position + offset, Quaternion.Euler(new Vector3(0, 0, angle)));
 
         canShoot = false;
         ammoCount = ammoCount - 1;
