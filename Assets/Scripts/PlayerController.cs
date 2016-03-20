@@ -67,7 +67,8 @@ public class PlayerController : MonoBehaviour {
         Vector2 stickDirection = new Vector2(Input.GetAxis("Horizontal2"), Input.GetAxis("Vertical2"));
         if (stickDirection.magnitude > 0.1f)
         {
-            gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * Mathf.Rad2Deg));
+            float angle = Mathf.Round((Mathf.Atan2(Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * Mathf.Rad2Deg) / 22.5f) * 22.5f;
+            gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
         else
         {
@@ -75,14 +76,16 @@ public class PlayerController : MonoBehaviour {
             Vector2 objectPos = Camera.main.WorldToScreenPoint(gun.transform.position);
             mousePos.x = mousePos.x - objectPos.x;
             mousePos.y = mousePos.y - objectPos.y;
-            gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg));
+            float angle = Mathf.Round((Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg) / 22.5f) * 22.5f;
+            Debug.Log(angle);
+            gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         }
 
-        if (gun.transform.eulerAngles.z >= 90 && gun.transform.eulerAngles.z <= 270)
+        if (gun.transform.eulerAngles.z > 90 && gun.transform.eulerAngles.z < 270)
         {
             gun.transform.localScale = new Vector3(1f, -1f, 1f);
         }
-        else if (gun.transform.eulerAngles.z < 90 || gun.transform.eulerAngles.z > 270)
+        else if (gun.transform.eulerAngles.z <= 90 || gun.transform.eulerAngles.z >= 270)
         {
             gun.transform.localScale = new Vector3(1f, 1f, 1f);
         }

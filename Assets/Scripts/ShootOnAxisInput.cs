@@ -71,14 +71,14 @@ public class ShootOnAxisInput : MonoBehaviour {
             mousePos.x = mousePos.x - objectPos.x;
             mousePos.y = mousePos.y - objectPos.y;
 
-            float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Round((Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg) / 22.5f) * 22.5f;
 
             Shoot(angle);
             
         }
         else if (canShoot && shootDirection.magnitude > 0.1f && Input.GetAxis("Shoot") > 0.5f)
         {
-            float angle = Mathf.Atan2(Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * Mathf.Rad2Deg;
+            float angle = Mathf.Round((Mathf.Atan2(Input.GetAxis("Vertical2"), Input.GetAxis("Horizontal2")) * Mathf.Rad2Deg) / 22.5f) * 22.5f;
 
             Shoot(angle);
         }
