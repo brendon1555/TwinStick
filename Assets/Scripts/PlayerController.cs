@@ -18,42 +18,14 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-        //if (Input.GetAxisRaw("Horizontal") > 0.5f || Input.GetAxisRaw("Horizontal") < -0.5f)
-        //{
-        //    rigid2d.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * moveSpeed, rigid2d.velocity.y);
-        //}
-
-        //if (Input.GetAxisRaw("Vertical") > 0.5f || Input.GetAxisRaw("Vertical") < -0.5f)
-        //{
-        //    rigid2d.velocity = new Vector2(rigid2d.velocity.x, Input.GetAxisRaw("Vertical") * moveSpeed);
-        //}
-
-
-
-        //if (Input.GetAxisRaw("Horizontal") < 0.5f && Input.GetAxisRaw("Horizontal") > -0.5f)
-        //{
-        //    rigid2d.velocity = new Vector2(0f, rigid2d.velocity.y);
-        //}
-
-        //if (Input.GetAxisRaw("Vertical") < 0.5f && Input.GetAxisRaw("Vertical") > -0.5f)
-        //{
-        //    rigid2d.velocity = new Vector2(rigid2d.velocity.x, 0f);
-        //}
-
-        ////rotation
-        //Vector3 mousePos = Input.mousePosition;
-
-        //Vector3 objectPos = Camera.main.WorldToScreenPoint(transform.position);
-        //mousePos.x = mousePos.x - objectPos.x;
-        //mousePos.y = mousePos.y - objectPos.y;
-
-        //float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
 
         Vector2 rbVelocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         rbVelocity *= moveSpeed;
         rigid2d.velocity = rbVelocity;
+
+        anim.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
+        anim.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
+  
 
         if(rbVelocity.sqrMagnitude > 0.01f)
         {
@@ -89,14 +61,5 @@ public class PlayerController : MonoBehaviour {
         {
             gun.transform.localScale = new Vector3(1f, 1f, 1f);
         }
-        //rotation
-        //Vector3 mousePos = Input.mousePosition;
-
-        //Vector3 objectPos = Camera.main.WorldToScreenPoint(transform.position);
-        //mousePos.x = mousePos.x - objectPos.x;
-        //mousePos.y = mousePos.y - objectPos.y;
-
-        //float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 }

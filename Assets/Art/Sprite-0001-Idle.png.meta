@@ -1,12 +1,13 @@
 fileFormatVersion: 2
-guid: 93149e87eeb1f6f44b350437f7335bc4
-timeCreated: 1458300809
+guid: 48bdbacb7616bfa46955852c5a889580
+timeCreated: 1458547471
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Sprite-0001_0
-    21300002: Sprite-0001_1
-    21300004: Sprite-0001_2
+    21300000: Sprite-0001-Idle_0
+    21300002: Sprite-0001-Idle_1
+    21300004: Sprite-0001-Idle_2
+    21300006: Sprite-0001-Idle_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -29,8 +30,8 @@ TextureImporter:
   cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
-  maxTextureSize: 2048
+  textureFormat: -3
+  maxTextureSize: 128
   textureSettings:
     filterMode: 0
     aniso: 16
@@ -53,7 +54,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Sprite-0001_0
+    - name: Sprite-0001-Idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -72,7 +73,7 @@ TextureImporter:
         - {x: 11, y: -8}
         - {x: 11, y: 8}
         - {x: 8, y: 9}
-    - name: Sprite-0001_1
+    - name: Sprite-0001-Idle_1
       rect:
         serializedVersion: 2
         x: 32
@@ -83,15 +84,15 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -6, y: 9}
-        - {x: -10, y: 4}
+      - - {x: -7, y: 9}
+        - {x: -10, y: 3}
         - {x: -10, y: -10}
-        - {x: -5, y: -16}
+        - {x: -7, y: -16}
         - {x: 8, y: -16}
-        - {x: 11, y: -11}
-        - {x: 11, y: 4}
+        - {x: 11, y: -8}
+        - {x: 11, y: 8}
         - {x: 8, y: 9}
-    - name: Sprite-0001_2
+    - name: Sprite-0001-Idle_2
       rect:
         serializedVersion: 2
         x: 64
@@ -102,14 +103,33 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
-      - - {x: -5, y: 9}
-        - {x: -10, y: 7}
-        - {x: -10, y: -12}
+      - - {x: 6, y: 8}
+        - {x: -8, y: 8}
+        - {x: -10, y: 6}
+        - {x: -10, y: -11}
         - {x: -7, y: -16}
-        - {x: 10, y: -16}
-        - {x: 11, y: -13}
+        - {x: 7, y: -16}
+        - {x: 11, y: -9}
         - {x: 11, y: 5}
-        - {x: 8, y: 9}
+    - name: Sprite-0001-Idle_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 6, y: 8}
+        - {x: -8, y: 8}
+        - {x: -10, y: 6}
+        - {x: -10, y: -11}
+        - {x: -7, y: -16}
+        - {x: 7, y: -16}
+        - {x: 11, y: -9}
+        - {x: 11, y: 5}
     outline: []
   spritePackingTag: 
   userData: 
